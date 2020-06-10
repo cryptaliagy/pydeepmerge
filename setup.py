@@ -1,8 +1,9 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='deepmerge',
+    name='pydeepmerge',
     version='0.1b',
+    license='MIT',
     description='A lightway library to perform deep merges of python dictionaries',
     url='https://github.com/taliamax/deepmerge',
     maintainer='Natalia Maximo',
