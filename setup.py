@@ -5,7 +5,7 @@ with open('README.md', 'r') as f:
 
 setup(
     name='pydeepmerge',
-    version='0.1b',
+    version='0.1.1b',
     license='MIT',
     description='A lightway library to perform deep merges of python dictionaries',
     long_description=long_description,
