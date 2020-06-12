@@ -1,5 +1,9 @@
 # DeepMerge
 
+![build status](https://img.shields.io/github/workflow/status/taliamax/pydeepmerge/build) ![MIT license](https://img.shields.io/pypi/l/pydeepmerge) ![coverage status](https://img.shields.io/coveralls/github/taliamax/pydeepmerge) 
+
+![pypi version](https://img.shields.io/pypi/v/pydeepmerge) ![pypi python versions supported](https://img.shields.io/pypi/pyversions/pydeepmerge) ![pypi downloads](https://img.shields.io/pypi/dm/pydeepmerge)
+
 A lightweight python package for performing deep-merges of python dictionaries
 
 Usage is simple:
