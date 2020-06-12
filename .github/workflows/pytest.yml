@@ -16,6 +16,8 @@ jobs:
       matrix:
         python: ['3.6', '3.7', '3.8']
     name: Testing pydeepmerge with python ${{ matrix.python }}
+    env:
+      COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
     steps:
       - uses: actions/checkout@v2
       - name: Setup python
@@ -30,4 +32,9 @@ jobs:
         run: flake8
 
       - name: Test with pytest
-        run: pytest --cov=pydeepmerge tests/
+        run: |
+          pytest --cov=pydeepmerge --cov-report term-missing tests/
+      
+      - name: Send test to coveralls.io
+        if: ${{ matrix.python == '3.7' }}  # Avoid sending multiple reports
+        run: coveralls
