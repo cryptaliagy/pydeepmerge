@@ -49,7 +49,7 @@ def deep_merge(
     This type was used instead of None to allow for None to still be a
     valid value in a dictionary.
     '''
-    result: Dict = {}  # noqa: E999
+    result = {}
     for mapping in mappings:
         for key, right_value in mapping.items():
             logging.debug("deep_merge: key: %s", key)
