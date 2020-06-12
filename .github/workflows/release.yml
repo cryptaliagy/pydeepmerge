@@ -79,6 +79,7 @@ jobs:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: dist/${{ env.wheel_name }}
           asset_name: ${{ env.wheel_name }}
+          asset_content_type: application/x-wheel+gzip
 
       - name: Upload tar release assets
         id: upload-release-tar-asset
@@ -89,6 +90,7 @@ jobs:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: dist/${{ env.tar_name }}
           asset_name: ${{ env.tar_name }}
+          asset_content_type: application/gzip
 
       - name: Install Twine
         run: pip install twine
