@@ -68,7 +68,7 @@ jobs:
           release_name: Release ${{ env.tag_version }}
           draft: false
           prerelease: false
-	  body: PyDeepMerge release ${{ env.tag_version }}
+          body: PyDeepMerge release ${{ env.tag_version }}
 
       - name: Upload wheel release assets
         id: upload-release-asset
