@@ -1,0 +1,54 @@
+name: build
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'setup.py'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python: ['3.6', '3.7', '3.8']
+    name: Testing pydeepmerge with python ${{ matrix.python }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup python
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python }}
+
+      - name: Install dependencies and script
+        run: pip install pytest pytest-cov flake8 -e .
+
+      - name: Lint with flake8
+        run: flake8
+
+      - name: Test with pytest
+        run: pytest --cov=pydeepmerge tests/
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    name: Releasing package
+    env:
+      TWINE_USERNAME: ${{ secrets.TWINE_USERNAME }}
+      TWINE_PASSWORD: ${{ secrets.TWINE_PASSWORD }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.7'
+
+      - name: Build release
+        run: python setup.py sdist
+      
+      - name: Install Twine
+        run: pip install twine
+      
+      - name: Release package
+        run: twine upload dist/*
+
