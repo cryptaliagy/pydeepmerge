@@ -1,1 +1,1 @@
-from pydeepmerge.types.types import Key
+from pydeepmerge.types.types import Key  # noqa: F401
