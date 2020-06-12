@@ -39,7 +39,10 @@ def deep_merge(
     The merge_strategy should be a function that accepts two values and returns
     whatever the value of the merge between those two values are. If the current
     dictionary does not have a key for the value in the merging dictionary,
-    the input value of the left_value function will be Key.KeyNotFound
+    the input value of the left_value function will be Key.KeyNotFound.
+
+    This type was used instead of None to allow for None to still be a
+    valid value in a dictionary.
     '''
     result: Dict = {}
     for mapping in mappings:
