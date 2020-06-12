@@ -71,7 +71,7 @@ jobs:
           body: PyDeepMerge release ${{ env.tag_version }}
 
       - name: Upload wheel release assets
-        id: upload-release-asset
+        id: upload-release-wheel-asset
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -81,7 +81,7 @@ jobs:
           asset_name: ${{ env.wheel_name }}
 
       - name: Upload tar release assets
-        id: upload-release-asset
+        id: upload-release-tar-asset
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
