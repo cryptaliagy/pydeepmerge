@@ -52,26 +52,42 @@ jobs:
       - name: Extract version number
         run: echo "::set-env name=tag_version::$(cat VERSION)"
 
+      - name: Extract wheel artifact name
+        run: echo "::set-env name=wheel_name::$(echo dist/*.whl)"
+
+      - name: Extract tar.gz artifact name
+        run: echo "::set-env name=tar_name::$(echo dist/*.tar.gz)"
+
       - name: Make Github release
         id: create_release
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: $tag_version
-          release_name: Release $tag_version
+          tag_name: ${{ env.tag_version }}
+          release_name: Release ${{ tag_version }}
           draft: false
           prerelease: false
 
-      - name: Upload release assets
+      - name: Upload wheel release assets
         id: upload-release-asset
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: dist/*
-          asset_name: *.whl
+          asset_path: dist/${{ env.wheel_name }}
+          asset_name: ${{ env.wheel_name }}
+
+      - name: Upload tar release assets
+        id: upload-release-asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: dist/${{ env.tar_name }}
+          asset_name: ${{ env.tar_name }}
 
       - name: Install Twine
         run: pip install twine
