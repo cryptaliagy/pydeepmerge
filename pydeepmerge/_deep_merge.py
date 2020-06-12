@@ -12,6 +12,11 @@ logging.basicConfig(level=logging.INFO)
 
 
 def prefer_right(left_value: Any, right_value: Any) -> Any:
+    '''
+    A merge strategy for prefering the right-hand value when
+    merging Mappings while also recursing if the right-hand value
+    is itself a Mapping
+    '''
     logging.debug(
         "prefer_right: left_value: %s, right_value: %s",
         left_value,

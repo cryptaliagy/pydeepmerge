@@ -1,6 +1,6 @@
 import pytest
 
-from pydeepmerge import prefer_right
+from pydeepmerge.strategies import prefer_right
 from pydeepmerge.types import Key
 
 
