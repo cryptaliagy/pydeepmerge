@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python: ['3.6', '3.7', '3.8']
+        python: ['3.5', '3.6', '3.7', '3.8']
     name: Testing pydeepmerge with python ${{ matrix.python }}
     env:
       COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
@@ -33,7 +33,7 @@ jobs:
 
       - name: Test with pytest
         run: |
-          pytest --cov=pydeepmerge --cov-report term-missing tests/
+          pytest
       
       - name: Send test to coveralls.io
         if: ${{ matrix.python == '3.7' }}  # Avoid sending multiple reports
