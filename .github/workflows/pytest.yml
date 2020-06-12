@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - '**.py'
+      - '!setup.py'
       - 'setup.cfg'
       - 'pytest.ini'
       - 'test-requirements.txt'
