@@ -3,12 +3,15 @@ from setuptools import setup, find_packages
 with open('README.md', 'r') as f:
     long_description = f.read()
 
+with open('VERSION', 'r' as f):
+    version = f.read()
+
 description = \
     'A lightweight library to perform deep merges of python dictionaries'
 
 setup(
     name='pydeepmerge',
-    version='0.2.1b2',
+    version=version,
     license='MIT',
     description=description,
     long_description=long_description,
