@@ -3,14 +3,17 @@ from setuptools import setup, find_packages
 with open('README.md', 'r') as f:
     long_description = f.read()
 
+description = \
+    'A lightweight library to perform deep merges of python dictionaries'
+
 setup(
     name='pydeepmerge',
     version='0.1.1b',
     license='MIT',
-    description='A lightway library to perform deep merges of python dictionaries',
+    description=description,
     long_description=long_description,
     long_description_content_type='text/markdown',
-    url='https://github.com/taliamax/deepmerge',
+    url='https://github.com/taliamax/pydeepmerge',
     maintainer='Natalia Maximo',
     maintainer_email='iam@natalia.dev',
     python_requires=">=3.5",
