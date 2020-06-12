@@ -1,13 +1,19 @@
 name: build
 
-on: [push]
+on:
+  push:
+    paths:
+      - '**.py'
+      - 'setup.cfg'
+      - 'pytest.ini'
+      - 'test-requirements.txt'
 
 jobs:
   build:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python: ['3.6', '3.7']
+        python: ['3.6', '3.7', '3.8']
     name: Testing acltest with python ${{ matrix.python }}
     steps:
       - uses: actions/checkout@v2
