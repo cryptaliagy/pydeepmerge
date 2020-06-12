@@ -43,6 +43,9 @@ jobs:
         with:
           python-version: '3.7'
 
+      - name: Install wheel
+        run: pip install wheel
+
       - name: Build release
         run: python setup.py sdist bdist_wheel
       
@@ -51,4 +54,3 @@ jobs:
       
       - name: Release package
         run: twine upload dist/*
-

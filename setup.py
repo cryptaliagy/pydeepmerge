@@ -8,7 +8,7 @@ description = \
 
 setup(
     name='pydeepmerge',
-    version='0.2.1b1',
+    version='0.2.1b2',
     license='MIT',
     description=description,
     long_description=long_description,
