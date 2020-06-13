@@ -6,6 +6,17 @@
 
 A lightweight python package for performing deep-merges of python dictionaries
 
+## Installation
+
+Install this package with pip!
+
+```bash
+$ pip install pydeepmerge
+```
+
+
+## Usage
+
 Usage is simple:
 
 ```python
