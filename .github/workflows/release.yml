@@ -57,26 +57,20 @@ jobs:
       - name: Build release
         run: python setup.py sdist bdist_wheel
 
-      - name: Extract version number
-        run: echo "::set-env name=tag_version::$(cat VERSION)"
+      - name: Extract previous version number
+        run: echo "::set-env name=prev_version::$(python scripts/extract_version.py)"
 
       - name: Extract wheel artifact name
-        run: echo "::set-env name=wheel_name::$(echo dist/*.whl | sed 's/dist\///')"
+        run: echo "::set-env name=wheel_name::$(echo dist/*.whl)"
 
       - name: Extract tar.gz artifact name
-        run: echo "::set-env name=tar_name::$(echo dist/*.tar.gz | sed 's/dist\///')"
+        run: echo "::set-env name=tar_name::$(echo dist/*.tar.gz)"
 
       - name: Pull tags from the repo
         run: git pull --tags
 
-      - name: Make make a tag with the version number for changelog generation
-        run: git tag $(cat VERSION)
-
-      - name: Generate changelog
-        run: gitchangelog > CHANGELOG.md
-
-      - name: Clean up tag to make sure nothing conflicts on release
-        run: git tag -d $(cat VERSION)
+      - name: Generate full changelog
+        run: gitchangelog | sed "g/(unreleased)/$(cat VERSION)/" > CHANGELOG.md
 
       - name: Make commit for auto-generated changelog
         uses: EndBug/add-and-commit@v4
@@ -86,39 +80,13 @@ jobs:
           add: 'CHANGELOG.md'
           message: '!gitchangelog'
 
-      - name: Make Github release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ env.tag_version }}
-          release_name: Release ${{ env.tag_version }}
-          draft: false
-          prerelease: false
-          body: PyDeepMerge release ${{ env.tag_version }}
+      - name: Generate version changelog for release
+        run: gitchangelog ${{ env.prev_version }}..HEAD | sed "g/(unreleased)/$(cat VERSION)/" > version_changelog.md
 
-      - name: Upload wheel release assets
-        id: upload-release-wheel-asset
-        uses: actions/upload-release-asset@v1
+      - name:  Create Github release & upload files
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: dist/${{ env.wheel_name }}
-          asset_name: ${{ env.wheel_name }}
-          asset_content_type: application/x-wheel+gzip
-
-      - name: Upload tar release assets
-        id: upload-release-tar-asset
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: dist/${{ env.tar_name }}
-          asset_name: ${{ env.tar_name }}
-          asset_content_type: application/gzip
+        run: hub release create -a dist/${{ env.wheel_name }} -a dist/${{ env.tar_name }} -F version_changelog.md $(cat VERSION)
 
       - name: Install Twine
         run: pip install twine
