@@ -70,7 +70,7 @@ jobs:
         run: git pull --tags
 
       - name: Generate full changelog
-        run: gitchangelog | sed "g/(unreleased)/$(cat VERSION)/" > CHANGELOG.md
+        run: gitchangelog | sed "s/(unreleased)/$(cat VERSION)/" > CHANGELOG.md
 
       - name: Make commit for auto-generated changelog
         uses: EndBug/add-and-commit@v4
@@ -81,7 +81,7 @@ jobs:
           message: '!gitchangelog'
 
       - name: Generate version changelog for release
-        run: gitchangelog ${{ env.prev_version }}..HEAD | sed "g/(unreleased)/$(cat VERSION)/" > version_changelog.md
+        run: gitchangelog ${{ env.prev_version }}..HEAD | sed "s/(unreleased)/$(cat VERSION)/" > version_changelog.md
 
       - name:  Create Github release & upload files
         env:
