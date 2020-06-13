@@ -14,6 +14,20 @@ Install this package with pip!
 $ pip install pydeepmerge
 ```
 
+To install this package from source, clone the repo and run:
+
+```bash
+$ pip install .
+```
+
+If you would like to develop, remember to install the extras.
+
+```bash
+# for bash
+$ pip install -e .[test,dev]
+# for zsh
+$ pip install -e .\[test,dev\]
+```
 
 ## Usage
 
@@ -44,12 +58,12 @@ from typing import Mapping
 def pick_shallower(left_value, right_value):
     if left_value is Key.NoKeyFound:
         return right_value
-    
+
     if isinstance(right_value, Mapping):
         if not isinstance(left_value, Mapping):
             return left_value
         return deep_merge(left_value, right_value)
-    
+
     return right_value
 ```
 
