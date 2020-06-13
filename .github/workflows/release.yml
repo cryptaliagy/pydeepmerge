@@ -86,7 +86,7 @@ jobs:
       - name:  Create Github release & upload files
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: hub release create -a dist/${{ env.wheel_name }} -a dist/${{ env.tar_name }} -F version_changelog.md $(cat VERSION)
+        run: hub release create -a ${{ env.wheel_name }} -a ${{ env.tar_name }} -F version_changelog.md $(cat VERSION)
 
       - name: Install Twine
         run: pip install twine
