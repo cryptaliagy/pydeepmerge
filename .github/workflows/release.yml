@@ -21,8 +21,13 @@ jobs:
         with:
           python-version: ${{ matrix.python }}
 
-      - name: Install dependencies and script
+      - name: Install dependencies and script (python>=3.6)
+        if: ${{ matrix.python != '3.5' }}
         run: pip install -e .[test]
+
+      - name: Install dependencies and script (python==3.5)
+        if: ${{ matrix.python == '3.5' }}
+        run: pip install flake8 pytest mock && pip install -e .
 
       - name: Lint with flake8
         run: flake8
