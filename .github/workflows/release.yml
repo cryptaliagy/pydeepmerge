@@ -43,8 +43,8 @@ jobs:
         with:
           python-version: '3.7'
 
-      - name: Install wheel
-        run: pip install wheel
+      - name: Install release packages
+        run: pip install wheel gitchangelog pystache
 
       - name: Build release
         run: python setup.py sdist bdist_wheel
@@ -53,10 +53,27 @@ jobs:
         run: echo "::set-env name=tag_version::$(cat VERSION)"
 
       - name: Extract wheel artifact name
-        run: echo "::set-env name=wheel_name::$(echo dist/*.whl)"
+        run: echo "::set-env name=wheel_name::$(echo dist/*.whl | sed 's/dist\///')"
 
       - name: Extract tar.gz artifact name
-        run: echo "::set-env name=tar_name::$(echo dist/*.tar.gz)"
+        run: echo "::set-env name=tar_name::$(echo dist/*.tar.gz | sed 's/dist\///')"
+
+      - name: Make make a tag with the version number for changelog generation
+        run: git tag $(cat VERSION)
+      
+      - name: Generate changelog
+        run: gitchangelog > CHANGELOG.md
+
+      - name: Clean up tag to make sure nothing conflicts on release
+        run: git tag -d $(cat VERSION)
+      
+      - name: Make commit for auto-generated changelog
+        uses: EndBug/add-and-commit@v4
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          add: 'CHANGELOG.md'
+          message: '!gitchangelog'
 
       - name: Make Github release
         id: create_release
@@ -77,7 +94,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ${{ env.wheel_name }}
+          asset_path: dist/${{ env.wheel_name }}
           asset_name: ${{ env.wheel_name }}
           asset_content_type: application/x-wheel+gzip
 
@@ -88,7 +105,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ${{ env.tar_name }}
+          asset_path: dist/${{ env.tar_name }}
           asset_name: ${{ env.tar_name }}
           asset_content_type: application/gzip
 
