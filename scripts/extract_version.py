@@ -14,6 +14,9 @@ def extract_version(changelog):
 
 if __name__ == '__main__':
     if len(sys.argv) != 2:
-        print("not enough arguments")
-        sys.exit(1)
-    extract_version(sys.argv[1])
+        with open("CHANGELOG.md", "r") as f:
+            data = f.read()
+    else:
+        data = sys.argv[1]
+
+    extract_version(data)
