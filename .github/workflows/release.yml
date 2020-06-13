@@ -22,7 +22,7 @@ jobs:
           python-version: ${{ matrix.python }}
 
       - name: Install dependencies and script
-        run: pip install -r test-requirements.txt -e .
+        run: pip install -e .[test]
 
       - name: Lint with flake8
         run: flake8
@@ -66,13 +66,13 @@ jobs:
 
       - name: Make make a tag with the version number for changelog generation
         run: git tag $(cat VERSION)
-      
+
       - name: Generate changelog
         run: gitchangelog > CHANGELOG.md
 
       - name: Clean up tag to make sure nothing conflicts on release
         run: git tag -d $(cat VERSION)
-      
+
       - name: Make commit for auto-generated changelog
         uses: EndBug/add-and-commit@v4
         env:
@@ -117,6 +117,6 @@ jobs:
 
       - name: Install Twine
         run: pip install twine
-      
+
       - name: Release package
         run: twine upload dist/*
