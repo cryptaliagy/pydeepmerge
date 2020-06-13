@@ -29,6 +29,7 @@ jobs:
 
       - name: Test with pytest
         run: pytest
+
   release:
     needs: build
     runs-on: ubuntu-latest
@@ -38,6 +39,8 @@ jobs:
       TWINE_PASSWORD: ${{ secrets.TWINE_PASSWORD }}
     steps:
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0  # Needed for changelog generation
       - name: Setup python
         uses: actions/setup-python@v2
         with:
@@ -57,6 +60,9 @@ jobs:
 
       - name: Extract tar.gz artifact name
         run: echo "::set-env name=tar_name::$(echo dist/*.tar.gz | sed 's/dist\///')"
+
+      - name: Pull tags from the repo
+        run: git pull --tags
 
       - name: Make make a tag with the version number for changelog generation
         run: git tag $(cat VERSION)
