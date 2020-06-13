@@ -1,6 +1,21 @@
 # Changelog
 
 
+## 0.2.2b5.post3 (2020-06-13)
+
+### Changes
+
+* Added more in depth instructions. [Natalia Maximo]
+
+### Other
+
+* Added install instruction. [Natalia Maximo]
+
+* Added links to README badges. [Natalia Maximo]
+
+* Create CODE_OF_CONDUCT.md. [Natalia Maximo]
+
+
 ## 0.2.2b5.post0 (2020-06-13)
 
 ### Changes
@@ -40,25 +55,50 @@
 
 * Separated upload steps for multiple artifacts. [Natalia Maximo]
 
+
+## 0.2.2b3.dev1 (2020-06-12)
+
+### Other
+
 * Removed tabs from release yaml. [Natalia Maximo]
 
 * Hopefully fixed the github action for release asset upload. [Natalia Maximo]
 
 * Fixed setup issue. [Natalia Maximo]
 
+
+## 0.2.2b1 (2020-06-12)
+
+### Other
+
 * New version release. [Natalia Maximo]
 
 * Removed tabs. [Natalia Maximo]
 
+
+## 0.2.2b0 (2020-06-12)
+
+### Other
+
 * Upped version. [Natalia Maximo]
 
 * Fixed yaml problems. [Natalia Maximo]
+
+
+## 0.2.1b3 (2020-06-12)
+
+### Other
 
 * Changed version release mechanism to also make github releases. [Natalia Maximo]
 
 * Added wheel install for package release. [Natalia Maximo]
 
 * Added bdist_wheel build for package release. [Natalia Maximo]
+
+
+## 0.2.1b0 (2020-06-12)
+
+### Other
 
 * Bumped up version. [Natalia Maximo]
 
@@ -68,6 +108,11 @@
 
 * Added noqa for py3.5 syntax lint problem. [Natalia Maximo]
 
+
+## 0.2b2 (2020-06-12)
+
+### Other
+
 * Changed up pytest configs. [Natalia Maximo]
 
 * Changed up test requirements. [Natalia Maximo]
@@ -75,6 +120,11 @@
 * Removed unneeded package import. [Natalia Maximo]
 
 * Restructured packages. [Natalia Maximo]
+
+
+## 0.2rc0 (2020-06-12)
+
+### Other
 
 * Bumped setup.py version. [Natalia Maximo]
 
@@ -84,11 +134,21 @@
 
 * Removed setup.py from test paths for regular build. [Natalia Maximo]
 
+
+## 0.2b0 (2020-06-12)
+
+### Other
+
 * Upped setup.py version. [Natalia Maximo]
 
 * Added more documentation for writing merge strategies. [Natalia Maximo]
 
 * Added release workflow. [Natalia Maximo]
+
+
+## 0.2a0 (2020-06-12)
+
+### Other
 
 * Upped setup.py version. [Natalia Maximo]
 
@@ -106,11 +166,21 @@
 
 * Updated docs to be more meaningful. [Natalia Maximo]
 
+
+## 0.1.1b0 (2020-06-10)
+
+### Other
+
 * Upped package version. [Natalia Maximo]
 
 * Added long description to package setup script. [Natalia Maximo]
 
 * Renamed project to pydeepmerge. [Natalia Maximo]
+
+
+## 0.1b0 (2020-06-10)
+
+### Other
 
 * Added initial implementation of deepmerge. [Natalia Maximo]
 
