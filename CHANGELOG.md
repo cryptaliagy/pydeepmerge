@@ -1,6 +1,29 @@
 # Changelog
 
 
+## 0.2.2b5.post6
+
+### New
+
+* Added script to extract latest version from changelog. [Natalia Maximo]
+
+* Added release status badge and linked to appropriate workflow. [Natalia Maximo]
+
+### Changes
+
+* Fixed issue with improper sed command in release workflow. [Natalia Maximo]
+
+* Use github 'hub' cli for release process. [Natalia Maximo]
+
+* Added backup for extract_version when no parameters are passed. [Natalia Maximo]
+
+* Added space between two badges. [Natalia Maximo]
+
+### Fix
+
+* Fixed release workflow naming error for artifact upload. [Natalia Maximo]
+
+
 ## 0.2.2b5.post3 (2020-06-13)
 
 ### Changes
