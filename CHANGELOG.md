@@ -1,7 +1,14 @@
 # Changelog
 
 
-## 0.2.2b5.post6
+## 0.2.2b5.post7
+
+### Fix
+
+* Updated release script to use a better title for the github release. [Natalia Maximo]
+
+
+## 0.2.2b5.post6 (2020-06-13)
 
 ### New
 
