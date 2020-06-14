@@ -43,14 +43,14 @@ def merge_configs(
 
         if file_type == '':
             raise FileTypeError(
-                f'File "{first_file_name}" has no file type extension'
+                'File "%s" has no file type extension' % first_file_name
             )
 
         for file_name in file_iter:
             if Path(file_name).suffix != file_type:
                 raise FileTypeError(
-                    f'File "{file_name}" has improper filetype. '
-                    f'Expected file type of "{file_type}"'
+                    'File "%s" has improper filetype. '
+                    'Expected file type of "%s"' % (file_name, file_type)
                 )
 
     if auto:
