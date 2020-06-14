@@ -10,7 +10,7 @@ on:
 jobs:
   version-check:
     runs-on: ubuntu-latest
-    name: Verify version has been increased
+    name: Verify version has not been increased
     outputs:
       go-no-go: ${{ steps.version-check.outcome }}
     steps:
