@@ -2,16 +2,36 @@ name: build
 
 on:
   push:
-    branches:
-      - '**'
-      - '!master'
     paths:
       - '**.py'
       - '!setup.py'
       - 'setup.cfg'
 
 jobs:
+  version-check:
+    runs-on: ubuntu-latest
+    name: Verify version has been increased
+    outputs:
+      go-no-go: ${{ steps.version-check.outcome }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.7'
+
+      - name: Install necessary package for scripts to run
+        run: pip install packaging
+
+      - name: Verify that the version has been increased
+        id: version-check
+        run: python scripts/version_verification.py --equals $(python scripts/extract_version.py) $(cat VERSION)
+        continue-on-error: true
+
+
   build:
+    needs: version-check
+    if: ${{ needs.version-check.outputs.go-no-go == 'success' || github.refs != 'ref/heads/master' }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
