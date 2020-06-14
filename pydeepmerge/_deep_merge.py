@@ -1,14 +1,16 @@
 from collections.abc import Mapping
 from pydeepmerge.types import Key
-from typing import Any
-from typing import Callable
-from typing import Dict
-from typing import List
+from typing import (
+    Any,
+    Callable,
+    Dict,
+    List
+)
 import logging
 
 MergeStrategy = Callable[[Any, Any], Any]
 
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(level=logging.DEBUG)
 
 
 def prefer_right(left_value: Any, right_value: Any) -> Any:
