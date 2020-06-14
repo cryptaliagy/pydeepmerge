@@ -98,12 +98,12 @@ jobs:
           message: '!gitchangelog'
 
       - name: Generate version changelog for release
-        run: gitchangelog ${{ env.prev_version }}..HEAD | sed "s/(unreleased)/$(cat VERSION)/" > version_changelog.md
+        run: gitchangelog ${{ env.prev_version }}..HEAD | sed "s/## (unreleased)/PyDeepMerge v$(cat VERSION)/" >> version_changelog.md
 
       - name:  Create Github release & upload files
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: hub release create -a ${{ env.wheel_name }} -a ${{ env.tar_name }} -m "PyDeepMerge v$(cat VERSION)" -F version_changelog.md $(cat VERSION)
+        run: hub release create -a ${{ env.wheel_name }} -a ${{ env.tar_name }} -F version_changelog.md $(cat VERSION)
 
       - name: Install Twine
         run: pip install twine
