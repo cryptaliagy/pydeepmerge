@@ -22,6 +22,11 @@ setup(
     python_requires=">=3.5",
     packages=find_packages(),
     keywords='mapping dictionary library merge',
+    entry_points={
+        'pydeepmerge.config_parsers': [
+            '.json = pydeepmerge.parsers.json:json_parser',
+        ]
+    },
     classifiers=[
         'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
