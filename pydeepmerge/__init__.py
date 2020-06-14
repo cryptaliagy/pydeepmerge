@@ -13,3 +13,5 @@ from pydeepmerge._deep_merge import deep_merge  # noqa: F401
 # in the _deep_merge module it'll cause a circular
 # import
 strategies.prefer_right = _deep_merge.prefer_right
+
+from pydeepmerge._merge_configs import merge_configs  # noqa: F401, E402
