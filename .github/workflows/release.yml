@@ -72,11 +72,12 @@ jobs:
       - name: Install release packages
         run: pip install wheel gitchangelog pystache
 
+      - name: Ensure clean dist/ and build/ folders
+        run: rm -rf dist build
+        continue-on-error: true
+
       - name: Build release
         run: python setup.py sdist bdist_wheel
-
-      - name: Extract previous version number
-        run: echo "::set-env name=prev_version::$(python scripts/extract_version.py)"
 
       - name: Extract wheel artifact name
         run: echo "::set-env name=wheel_name::$(echo dist/*.whl)"
@@ -99,7 +100,7 @@ jobs:
           message: '!gitchangelog'
 
       - name: Generate version changelog for release
-        run: gitchangelog ${{ env.prev_version }}..HEAD | sed "s/## (unreleased)/PyDeepMerge v$(cat VERSION)/" >> version_changelog.md
+        run: ./scripts/get_unreleased_changelog.sh | sed "s/## (unreleased)/PyDeepMerge v$(cat VERSION)/" > version_changelog.md
 
       - name:  Create Github release & upload files
         env:
