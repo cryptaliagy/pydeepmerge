@@ -26,10 +26,11 @@ jobs:
 
   build:
     needs: version-check
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
         python: ['3.5', '3.6', '3.7', '3.8']
+        os: [ubuntu-latest, windows-latest, macos-latest]
     name: Testing pydeepmerge with python ${{ matrix.python }}
     steps:
       - uses: actions/checkout@v2
