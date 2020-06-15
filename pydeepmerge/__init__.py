@@ -2,10 +2,14 @@
 A lightweight package to perform deep merges of Mapping objects
 '''
 
-import pydeepmerge.strategies as strategies
 import pydeepmerge._deep_merge as _deep_merge
 
 from pydeepmerge._deep_merge import deep_merge  # noqa: F401
+
+# Note that if `strategies` is imported before
+# `deep_merge`, the code imports of `deep_merge`
+# in `strategies` will fail.
+import pydeepmerge.strategies as strategies
 
 # Since prefer_right is a merge strategy, it should be
 # in the strategies subpackage, but it's also the default
