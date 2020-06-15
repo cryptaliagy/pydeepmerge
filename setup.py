@@ -22,11 +22,15 @@ setup(
     python_requires=">=3.5",
     packages=find_packages(),
     keywords='mapping dictionary library merge',
+    extras_require={
+        'yaml': ['pyyaml'],
+        'test': ['pytest', 'pytest-cov', 'coveralls', 'flake8']
+    },
     entry_points={
         'pydeepmerge.config_parsers': [
             '.json = pydeepmerge.parsers.json:json_parser',
-            '.yaml = pydeepmerge.parsers.yaml:yaml_loader',
-            '.yml = pydeepmerge.parsers.yaml:yaml_loader'
+            '.yaml = pydeepmerge.parsers.yaml:yaml_loader [yaml]',
+            '.yml = pydeepmerge.parsers.yaml:yaml_loader [yaml]'
         ]
     },
     classifiers=[
