@@ -1,0 +1,15 @@
+#!/bin/bash
+echo "Installing dev dependencies...";
+pip install pre-commit;
+echo "\e[32mDone!\e[39m"
+echo "Installing pre-commit hooks...";
+pre-commit install;
+echo "\e[32mDone!\e[39m";
+echo "Installing test dependencies...";
+pip install pytest pytest-cov flake8;
+echo "\e[32mDone!\e[39m";
+echo "Installing PyDeepMerge...";
+pip install -e .;
+echo "\e[32mDone!\e[39m";
+pre-commit run --all-files;
+pytest;

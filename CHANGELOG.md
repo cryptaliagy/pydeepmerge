@@ -215,5 +215,3 @@
 * Added initial implementation of deepmerge. [Natalia Maximo]
 
 * Added license. [Natalia Maximo]
-
-

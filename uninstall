@@ -1,0 +1,5 @@
+#!/bin/bash
+echo "Uninstalling pre-commit hooks"
+pre-commit uninstall;
+echo "Uninstalling PyDeepMerge"
+pip uninstall -y pydeepmerge;
