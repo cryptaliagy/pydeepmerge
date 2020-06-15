@@ -22,3 +22,13 @@ def keep_default(stategy: MergeStrategy) -> MergeStrategy:
             return right
         return stategy(left, right)
     return newstrategy
+
+
+def disallow_mixed(strategy: MergeStrategy) -> MergeStrategy:
+    @ft.wraps(strategy)
+    @keep_default
+    def newstrategy(left, right):
+        if isinstance(left, Mapping) ^ isinstance(right, Mapping):
+            raise TypeError("Combining a mapping with a non-mapping disallowed")
+        return strategy(left, right)
+    return newstrategy
