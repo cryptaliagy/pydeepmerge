@@ -33,7 +33,6 @@ def merge_configs(
     If `strict` is set to True, all file names must have the same extension.
     This also applies to file type variations like `.yml` vs `.yaml`
     '''
-    parsers = {}
 
     if strict:
         file_iter = iter(files)
@@ -53,6 +52,7 @@ def merge_configs(
                     'Expected file type of "%s"' % (file_name, file_type)
                 )
 
+    parsers = {}
     if auto:
         parsers = load_parsers()
 
