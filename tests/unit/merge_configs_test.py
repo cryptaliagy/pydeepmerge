@@ -37,7 +37,7 @@ def test_merge_configs(mock_json_parser, parser_returns, expected_result):
         (ParserNotAvailableError, ['foo.yaml', 'bar.yaml'])
     ]
 )
-@patch('pydeepmerge.parsers.load_parsers')
+@patch('pydeepmerge._merge_configs.load_parsers')
 def test_merge_config_fail(mock_load_parser, exception_class, test_files):
     mock_load_parser.return_value = {'.json': lambda x: x}
     with pytest.raises(exception_class):

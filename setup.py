@@ -25,6 +25,8 @@ setup(
     entry_points={
         'pydeepmerge.config_parsers': [
             '.json = pydeepmerge.parsers.json:json_parser',
+            '.yaml = pydeepmerge.parsers.yaml:yaml_loader',
+            '.yml = pydeepmerge.parsers.yaml:yaml_loader'
         ]
     },
     classifiers=[
