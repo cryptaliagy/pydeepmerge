@@ -6,6 +6,7 @@ on:
       - '**.py'
       - '!setup.py'
       - 'setup.cfg'
+      - 'VERSION'
 
 jobs:
   version-check:
