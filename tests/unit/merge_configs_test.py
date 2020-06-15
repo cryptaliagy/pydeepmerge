@@ -8,20 +8,24 @@ from pydeepmerge.errors import (
 
 
 @pytest.mark.unit
-@patch('pydeepmerge.parsers.json.json_parser')
-def test_merge_configs(mock_json_parser):
-    mock_json_parser.side_effect = [
-        {'foo': 'spam', 'egg': 'ham'},
-        {'foo': 'bar', 'baz': 'egg'}
+@pytest.mark.parametrize(
+    'parser_returns,expected_result',
+    [
+        (
+            [{'foo': 'spam', 'egg': 'ham'}, {'bar': 'baz', 'spam': 'eggs'}],
+            {'foo': 'spam', 'egg': 'ham', 'bar': 'baz', 'spam': 'eggs'}
+        ),
+        (
+            [{'foo': 'spam', 'egg': 'ham'}, {'bar': 'baz', 'foo': 'ham'}],
+            {'foo': 'ham', 'egg': 'ham', 'bar': 'baz'}
+        ),
     ]
+)
+@patch('pydeepmerge.parsers.json.json_parser')
+def test_merge_configs(mock_json_parser, parser_returns, expected_result):
+    mock_json_parser.side_effect = parser_returns
 
-    expected_return = {
-        'foo': 'bar',
-        'egg': 'ham',
-        'baz': 'egg'
-    }
-
-    assert merge_configs('foo.json', 'bar.json') == expected_return
+    assert merge_configs('foo.json', 'bar.json') == expected_result
 
 
 @pytest.mark.unit
