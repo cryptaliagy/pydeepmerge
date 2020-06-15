@@ -64,7 +64,7 @@ def merge_configs(
         file_type = Path(file_name).suffix
 
         if file_type not in parsers:
-            raise ParserNotAvailableError(f'No parser for "{file_type}"')
+            raise ParserNotAvailableError('No parser for "%s"' % file_type)
 
         parser = parsers[file_type]
         file_data.append(parser(file_name))
