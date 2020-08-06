@@ -6,16 +6,15 @@ from pydeepmerge.errors import (
     ParserNotAvailableError
 )
 from pydeepmerge.parsers import load_parsers
-from pydeepmerge.strategies import prefer_right
+from pydeepmerge.strategies import prefer_right  # pytype: disable=import-error
 from pydeepmerge.types import MergeStrategy
 from typing import (
     Dict,
-    List,
 )
 
 
 def merge_configs(
-    *files: List[str],
+    *files: str,
     merge_strategy: MergeStrategy = prefer_right,
     auto: bool = True,
     strict: bool = True,
