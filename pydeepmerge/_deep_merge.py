@@ -4,7 +4,6 @@ from typing import (
     Any,
     Callable,
     Dict,
-    List
 )
 import logging
 
@@ -36,7 +35,7 @@ def prefer_right(left_value: Any, right_value: Any) -> Any:
 
 
 def deep_merge(
-    *mappings: List[Mapping],
+    *mappings: Mapping,
     merge_strategy: MergeStrategy = prefer_right
 ) -> Dict:
     '''
