@@ -9,7 +9,7 @@ import logging
 
 MergeStrategy = Callable[[Any, Any], Any]
 
-logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 
 def prefer_right(left_value: Any, right_value: Any) -> Any:
@@ -53,8 +53,8 @@ def deep_merge(
     result = {}
     for mapping in mappings:
         for key, right_value in mapping.items():
-            logging.debug("deep_merge: key: %s", key)
+            logger.debug("deep_merge: key: %s", key)
             left_value = result.get(key, Key.KeyNotFound)
             result[key] = merge_strategy(left_value, right_value)
-            logging.debug("result_dict: %s", result)
+            logger.debug("result_dict: %s", result)
     return result
