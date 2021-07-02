@@ -10,6 +10,7 @@ import logging
 MergeStrategy = Callable[[Any, Any], Any]
 
 logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
 
 
 def prefer_right(left_value: Any, right_value: Any) -> Any:
